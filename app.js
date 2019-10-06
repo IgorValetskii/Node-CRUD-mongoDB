@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 //Routes
 // const router = require('./router');
 const users = require('./routes/users');
+const leagues = require('./routes/leagues');
 
 //Middlewares
 app.use(bodyParser.urlencoded({
@@ -15,7 +16,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 //Routes
-app.use('/users', users);
+app.use(users);
+app.use(leagues);
 
 
 // router(app);
