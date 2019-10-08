@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const users = require('./routes/users');
 const leagues = require('./routes/leagues');
 const stages = require('./routes/stages');
+const races = require('./routes/races');
 
 //Middlewares
 app.use(bodyParser.urlencoded({
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 app.use(users);
 app.use(leagues);
 app.use(stages);
+app.use(races);
 
 async function start() {
     try {
