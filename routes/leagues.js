@@ -1,9 +1,6 @@
-const express = require('express');
-// const router = express.Router();
 const router = require('express-promise-router')();
 
 const LeaguesController = require('../controllers/leagues');
-
 const controller = new LeaguesController();
 
 
@@ -13,8 +10,12 @@ router.route('/leagues')
     .post(controller.addLeague.bind(LeaguesController));
 
 router.route('/leagues/:leaguesId')
-    .get(controller.getLeague.bind(LeaguesController));
-    // .put(Controller.updateUser.bind(UsersController))
-    // .delete(Controller.deleteUser.bind(UsersController));
+    .get(controller.getLeague.bind(LeaguesController))
+    .put(controller.updateLeague.bind(LeaguesController))
+    .delete(controller.deleteLeague.bind(LeaguesController));
+
+router.route('/leagues/:leaguesId/users')
+    .post(controller.addLeagueUser.bind(LeaguesController))
+    .get(controller.getLeagueUsers.bind(LeaguesController));
 
 module.exports = router;

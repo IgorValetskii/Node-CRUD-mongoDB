@@ -20,6 +20,7 @@ class Service {
         const newUser = await new User(body);
 
         const user = await newUser.save();
+        
         return user;
     }
 
@@ -34,23 +35,29 @@ class Service {
         return result;
     }
 
-    async addLeague(body, userId){
-        const newLeague = await new League(body);
-        console.log('newLeague',newLeague);
-        const user = await User.findById(userId);
-        newLeague.users = user;
-        const league = await newLeague.save();
+    // async addLeague(body, userId){
+    //     const newLeague = await new League(body);
+    //     console.log('newLeague',newLeague);
+    //     const user = await User.findById(userId);
+    //     newLeague.users = user;
+    //     const league = await newLeague.save();
+    //
+    //     user.leagues.push(newLeague);
+    //     await user.save();
+    //     return league;
+    // }
 
-        user.leagues.push(newLeague);
-        await user.save();
-        return league;
-    }
-
-    async getUserleagues(userId){
-        const user = await User.findById(userId).populate('leagues');
-        console.log(user.leagues);
-        return user.leagues;
-    }
+    // async getUserleagues(userId){
+    //     // const user = await User.findById(userId).populate('leagues');
+    //     const user = await User.findById(userId);
+    //     console.log(user.leagues);
+    //     // user.leagues.forEach(i => {
+    //     //     console.log(i)
+    //     // });
+    //     // const a = user.leagues.[0];
+    //     // console.log(a);
+    //     return user;
+    // }
 }
 
 module.exports = Service;

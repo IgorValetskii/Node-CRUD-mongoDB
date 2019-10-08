@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 
 // mongoose.Promise = global.Promise;
 //Routes
-// const router = require('./router');
 const users = require('./routes/users');
 const leagues = require('./routes/leagues');
+const stages = require('./routes/stages');
 
 //Middlewares
 app.use(bodyParser.urlencoded({
@@ -18,10 +18,7 @@ app.use(bodyParser.json());
 //Routes
 app.use(users);
 app.use(leagues);
-
-
-// router(app);
-
+app.use(stages);
 
 async function start() {
     try {

@@ -42,19 +42,21 @@ class Controller {
         if (result) res.status(200).send('User successfully deleted');
     }
 
-    async getUserLeagues(req,res){
-        const {userId} = req.params;
-        const result = await service.getUserleagues(userId);
-        res.status(201).json(result);
-    }
+    // async getUserLeagues(req,res){
+    //     const {userId} = req.params;
+    //     console.log(req.params);
+    //     const result = await service.getUserleagues(userId);
+    //     res.status(201).json(result);
+    // }
 
-    async addUserLeague(req,res){
-        const {userId} = req.params;
-        const body = req.body;
-        const result = await service.addLeague(body, userId);
-        res.status(201).json(result);
-
-    }
+    // async addUserLeague(req,res){
+    //     const {userId} = req.params;
+    //     console.log(userId);
+    //     const body = req.body;
+    //     const result = await service.addLeague(body, userId);
+    //     res.status(201).json(result);
+    //
+    // }
 }
 
 module.exports = Controller;
