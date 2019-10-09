@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 
 //Routes
 app.use('/users', users);
-app.use(leagues);
-app.use(stages);
+app.use('/leagues',leagues);
+app.use('/stages',stages);
 app.use('/races',races);
 
 async function start() {

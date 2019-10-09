@@ -5,11 +5,11 @@ const controller = new StagesController();
 
 
 
-router.route('/stages')
+router.route('/')
     .get(controller.getAllStages.bind(StagesController))
     .post(controller.addStage.bind(StagesController));
 
-router.route('/stages/:stagesId')
+router.route('/:stagesId')
     .get(controller.getStage.bind(StagesController))
     .put(controller.updateStage.bind(StagesController))
     .delete(controller.deleteStage.bind(StagesController));
