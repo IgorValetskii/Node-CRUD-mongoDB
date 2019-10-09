@@ -43,21 +43,10 @@ class Controller {
         if (result) res.status(200).send('User successfully deleted');
     }
 
-    async addRaceUser(req, res) {
-        const {racesId} = req.params;
+    async getRaceStages(req, res) {
+        const {season} = req.params;
         console.log(req.params);
-        console.log(req.params.racesId);
-        const body = req.body;
-        console.log(body);
-        const result = await service.addRaceUser(body, racesId);
-        res.status(201).json(result);
-
-    }
-
-    async getRaceUsers(req, res) {
-        const {racesId} = req.params;
-        console.log(req.params);
-        const result = await service.getRaceUsers(racesId);
+        const result = await service.getRaceStages(season);
         res.status(201).json(result);
     }
 

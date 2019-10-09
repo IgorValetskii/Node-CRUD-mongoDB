@@ -1,63 +1,55 @@
 const User = require('../models/user');
 const League = require('../models/leagues');
+const Race = require('../models/races');
+const mongoose = require('mongoose')
 
 class Service {
-    constructor(){
+    constructor() {
 
     }
 
-    async getAllUsers(){
+    async getAllUsers() {
         const users = await User.find({});
         return users;
     }
 
-    async getUser(userId){
+    async getUser(userId) {
         const user = await User.findById(userId);
         return user;
     }
 
-    async addUser(body){
-        const newUser = await new User(body);
-
-        const user = await newUser.save();
-        
-        return user;
+    async addUser(body) {
+        const newUser = new User(body);
+        return await newUser.save();
     }
 
-    async updateUser(userId, newUser){
+    async updateUser(userId, newUser) {
         const result = await User.findByIdAndUpdate(userId, newUser, {new: true});
         return result;
     }
 
-    async deleteUser(userId){
+    async deleteUser(userId) {
         const result = await User.findByIdAndDelete(userId);
         console.log(result);
         return result;
     }
 
-    // async addLeague(body, userId){
-    //     const newLeague = await new League(body);
-    //     console.log('newLeague',newLeague);
-    //     const user = await User.findById(userId);
-    //     newLeague.users = user;
-    //     const league = await newLeague.save();
-    //
-    //     user.leagues.push(newLeague);
-    //     await user.save();
-    //     return league;
-    // }
+    async getUserRaces(userId) {
+        const id = mongoose.Types.ObjectId(userId);
+        const result = await Race.aggregate( [
+            {$match: {user: id}}
+            ]);
+        return result;
+    }
 
-    // async getUserleagues(userId){
-    //     // const user = await User.findById(userId).populate('leagues');
-    //     const user = await User.findById(userId);
-    //     console.log(user.leagues);
-    //     // user.leagues.forEach(i => {
-    //     //     console.log(i)
-    //     // });
-    //     // const a = user.leagues.[0];
-    //     // console.log(a);
-    //     return user;
-    // }
+    async getUserLeagues(userId) {
+        const id = mongoose.Types.ObjectId(userId);
+        const result = await League.aggregate( [
+            {$match: {users: id}}
+        ]);
+        return result;
+    }
+
 }
 
 module.exports = Service;

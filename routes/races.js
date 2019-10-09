@@ -5,17 +5,20 @@ const controller = new RacesController();
 
 
 
-router.route('/races')
+router.route('/')
     .get(controller.getAllRaces.bind(RacesController))
     .post(controller.addRace.bind(RacesController));
 
-router.route('/races/:racesId')
+router.route('/:racesId')
     .get(controller.getRace.bind(RacesController))
     .put(controller.updateRace.bind(RacesController))
     .delete(controller.deleteRace.bind(RacesController));
 
-router.route('/races/:racesId/users')
-    .post(controller.addRaceUser.bind(RacesController))
-    .get(controller.getRaceUsers.bind(RacesController));
+// router.route('/:racesId/users')
+//     .post(controller.addRaceUser.bind(RacesController))
+//     .get(controller.getRaceUsers.bind(RacesController));
+
+router.route('/:season/stages')
+    .get(controller.getRaceStages.bind(RacesController));
 
 module.exports = router;

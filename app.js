@@ -17,10 +17,10 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 //Routes
-app.use(users);
+app.use('/users', users);
 app.use(leagues);
 app.use(stages);
-app.use(races);
+app.use('/races',races);
 
 async function start() {
     try {

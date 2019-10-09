@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const leagueSchema = new Schema({
-    title : String,
+    title : {
+        type: String,
+        required: true
+    },
     description : String,
     season : String,
     users: [{
