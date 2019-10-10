@@ -3,6 +3,21 @@ const router = require('express-promise-router')();
 const UsersController = require('../controllers/users');
 const Controller = new UsersController();
 
+/**
+ * @swagger
+ * /users:
+ *   get:
+ *     description: Returns users
+ *     produces:
+ *      - application/json
+ *     responses:
+ *       200:
+ *         description: users
+ *         schema:
+ *           type: array
+ *           items:
+ *             $ref: '#/definitions/User'
+ */
 
 
 router.route('/')

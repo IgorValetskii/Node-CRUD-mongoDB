@@ -2,7 +2,21 @@ const router = require('express-promise-router')();
 
 const LeaguesController = require('../controllers/leagues');
 const controller = new LeaguesController();
-
+/**
+ * @swagger
+ * /leagues:
+ *   get:
+ *     description: Returns leagues
+ *     produces:
+ *      - application/json
+ *     responses:
+ *       200:
+ *         description: leagues
+ *         schema:
+ *           type: array
+ *           items:
+ *             $ref: 'league'
+ */
 
 
 router.route('/')

@@ -2,6 +2,32 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger');
+const swaggerJSDoc = require('swagger-jsdoc');
+
+const options = {
+    definition: {
+        openapi: '3.0.0', // Specification (optional, defaults to swagger: '2.0')
+        info: {
+            title: 'Hello World', // Title (required)
+            version: '1.0.0', // Version (required)
+        },
+    },
+    // Path to the API docs
+    apis: ['./routes/users.js','./routes/leagues.js']
+};
+
+// Initialize swagger-jsdoc -> returns validated swagger spec in json format
+const swaggerSpec = swaggerJSDoc(options);
+
+
+
+app.get('/api-docs.json', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerSpec);
+});
+
 
 //Routes
 const users = require('./routes/users');
@@ -20,6 +46,9 @@ app.use('/users', users);
 app.use('/leagues',leagues);
 app.use('/stages',stages);
 app.use('/races',races);
+
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 async function start() {
     try {
