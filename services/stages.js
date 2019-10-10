@@ -20,7 +20,8 @@ class Service {
         const newStage = await new Stage(body);
         const stage = await newStage.save();
         console.log('newStage', newStage);
-        await stage.leagues.push(body.leagueId);
+        // await stage.leagues.push(body.leagueId);
+        // console.log(stage);
 
         return stage;
     }

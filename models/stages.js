@@ -5,10 +5,9 @@ const stageSchema = new Schema({
     title : String,
     description : String,
     location : String,
-    leagues: [{
-        type: Schema.Types.ObjectId,
-        ref : 'league'
-    }]
+    league: {
+        type: Schema.Types.ObjectId
+}
 });
 
 const Stage = mongoose.model('stage', stageSchema);

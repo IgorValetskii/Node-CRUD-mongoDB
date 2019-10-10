@@ -2,7 +2,7 @@ const Race = require('../models/races');
 const League = require('../models/leagues');
 const Stage = require('../models/stages');
 const User = require('../models/user');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 class Service {
     constructor() {
@@ -47,21 +47,21 @@ class Service {
             },
             // {
             //     $project: {
-            //         _id: {
-            //             $toString: "$_id"
-            //         },
-            //         title: "$title",
-            //         description: "$description"
+            //         _id: '$_id',
+            //
+            //         title: '$title',
+            //         description: '$description'
             //     }
             // },
             {
                 $lookup: {
                     from: 'stages',
-                    localField: 'title',
-                    foreignField: '_id',
+                    localField: '_id',
+                    foreignField: 'league',
                     as: 'stagesArr'
                 }
             },
+
             {
                 $unwind: {
                     path: '$stagesArr',
@@ -69,26 +69,32 @@ class Service {
                 }
             },
 
+            {
+                $project: {
+                    'stagesArr._id': '$stagesArr._id',
+                    'stagesArr.title': '$stagesArr.title',
+                    'stagesArr.description': '$stagesArr.description',
+                    'stagesArr.location': '$stagesArr.location'
+                }
+            },
+
+            {
+                $lookup: {
+                    from: 'races',
+                    localField: 'stagesArr._id',
+                    foreignField: 'stage',
+                    as: 'stagesArr.racesArr',
+                }
+            },
             // {
             //     $project: {
-            //         'stagesArr._id': {
-            //             $toString: "$stagesArr._id"
-            //         }
-            //     }
-            // }
-            //         'stagesArr.title': "$stagesArr.title",
-            //         'stagesArr.description': "$stagesArr.description",
-            //         'stagesArr.location' : "$stagesArr.location"
+            //         'stagesArr.racesArr._id': '$stagesArr.racesArr._id',
+            //         'stagesArr.racesArr.title': '$stagesArr.racesArr.title',
+            //         'stagesArr.racesArr.description': '$stagesArr.racesArr.description',
+            //         'stagesArr.racesArr.location': '$stagesArr.racesArr.location'
             //     }
             // },
-            // {
-            //     $lookup: {
-            //         from: "races",
-            //         localField: "stagesArr._id",
-            //         foreignField: "stage_id",
-            //         as: "stagesArr.racesArray",
-            //     }
-            // }
+
         ]);
         return result;
     }
