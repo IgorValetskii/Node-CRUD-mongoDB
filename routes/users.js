@@ -16,7 +16,8 @@ router.route('/:userId')
 
 router.route('/:userId/races')
     .get(Controller.getUserRaces.bind(UsersController));
-//     .post(Controller.addUserLeague.bind(UsersController));
+
 router.route('/:userId/leagues')
     .get(Controller.getUserLeagues.bind(UsersController));
+
 module.exports = router;

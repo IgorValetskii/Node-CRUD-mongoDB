@@ -1,5 +1,4 @@
 const Stage = require('../models/stages');
-const League = require('../models/leagues');
 
 class Service {
     constructor() {
@@ -19,9 +18,6 @@ class Service {
     async addStage(body) {
         const newStage = await new Stage(body);
         const stage = await newStage.save();
-        console.log('newStage', newStage);
-        // await stage.leagues.push(body.leagueId);
-        // console.log(stage);
 
         return stage;
     }
@@ -33,7 +29,6 @@ class Service {
 
     async deleteStage(stagesId) {
         const result = await Stage.findByIdAndDelete(stagesId);
-        console.log(result);
         return result;
     }
 

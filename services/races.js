@@ -1,8 +1,5 @@
 const Race = require('../models/races');
 const League = require('../models/leagues');
-const Stage = require('../models/stages');
-const User = require('../models/user');
-const mongoose = require('mongoose');
 
 class Service {
     constructor() {
@@ -22,8 +19,6 @@ class Service {
     async addRace(body) {
         const newRace = await new Race(body);
         const race = await newRace.save();
-        console.log('newRace', newRace);
-        // await race.leagues.push(body.leagueId);
 
         return race;
     }
@@ -35,12 +30,11 @@ class Service {
 
     async deleteRace(racesId) {
         const result = await Race.findByIdAndDelete(racesId);
-        console.log(result);
+
         return result;
     }
 
     async getRaceStages(season) {
-        // const id = mongoose.Types.ObjectId(id);
         const result = await League.aggregate([
             {
                 $match: {season: season}

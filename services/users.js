@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const League = require('../models/leagues');
 const Race = require('../models/races');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 class Service {
     constructor() {
@@ -30,7 +30,6 @@ class Service {
 
     async deleteUser(userId) {
         const result = await User.findByIdAndDelete(userId);
-        console.log(result);
         return result;
     }
 

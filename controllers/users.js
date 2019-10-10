@@ -1,13 +1,9 @@
-// const User = require('../models/user');
 const Service = require('../services/users');
 const service = new Service();
 
 
-
-
 class Controller {
     constructor() {
-
     }
 
     async getAllUsers(req, res, next) {
@@ -17,7 +13,6 @@ class Controller {
 
     async getUser(req, res, next) {
         const {userId} = req.params;
-        console.log(userId);
         const result = await service.getUser(userId);
         res.status(200).json(result);
     }

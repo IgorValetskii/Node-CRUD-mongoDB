@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
 
-// mongoose.Promise = global.Promise;
 //Routes
 const users = require('./routes/users');
 const leagues = require('./routes/leagues');

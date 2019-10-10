@@ -14,13 +14,11 @@ class Controller {
 
     async getRace(req, res, next) {
         const {racesId} = req.params;
-        console.log(req.params);
         const result = await service.getRace(racesId);
         res.status(201).json(result);
     }
 
     async addRace(req, res, next) {
-        // const {raceId} = req.params;
         const body = req.body;
         const result = await service.addRace(body);
         res.status(201).json(result);
@@ -29,10 +27,8 @@ class Controller {
 
 
     async updateRace(req, res, next) {
-        console.log(req.params);
         const {racesId} = req.params;
         const newRace = req.body;
-        console.log(req.body);
         const result = await service.updateRace(racesId, newRace);
         res.status(200).json(result);
     }
@@ -45,7 +41,6 @@ class Controller {
 
     async getRaceStages(req, res) {
         const {season} = req.params;
-        console.log(req.params);
         const result = await service.getRaceStages(season);
         res.status(201).json(result);
     }

@@ -4,7 +4,6 @@ const service = new Service();
 
 class Controller {
     constructor() {
-
     }
 
     async getAllStages(req, res, next) {
@@ -14,24 +13,19 @@ class Controller {
 
     async getStage(req, res, next) {
         const {stagesId} = req.params;
-        console.log(req.params);
         const result = await service.getStage(stagesId);
-        res.status(201).json(result);
+        res.status(200).json(result);
     }
 
     async addStage(req, res, next) {
         const body = req.body;
         const result = await service.addStage(body);
         res.status(201).json(result);
-
     }
 
-
     async updateStage(req, res, next) {
-        console.log(req.params);
         const {stagesId} = req.params;
         const newStage = req.body;
-        console.log(req.body);
         const result = await service.updateStage(stagesId, newStage);
         res.status(200).json(result);
     }
