@@ -24,7 +24,7 @@ const controller = new LeaguesController();
  *       season:
  *         type: string
  *         example: Winter
- *   UserID:
+ *   UserId:
  *     type: object
  *     properties:
  *       UserId:
