@@ -40,11 +40,6 @@ class Service {
         return league;
     }
 
-    async getLeagueUsers(leaguesId) {
-        const league = await League.findById(leaguesId).populate('users');
-        return league;
-    }
-
 }
 
 module.exports = Service;

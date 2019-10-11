@@ -4,38 +4,171 @@ const LeaguesController = require('../controllers/leagues');
 const controller = new LeaguesController();
 /**
  * @swagger
- * /leagues:
- *   get:
- *     description: Returns leagues
- *     produces:
- *      - application/json
- *     responses:
- *       200:
- *         description: leagues
- *         schema:
- *           type: array
- *           items:
- *             $ref: 'league'
+ * tags:
+ * - name: Leagues
+ *   description: Requests connected with leagues data
  */
 
+/**
+ * @swagger
+ * definitions:
+ *   League:
+ *     type: object
+ *     properties:
+ *       title:
+ *         type: string
+ *         example: League1
+ *       description:
+ *         type: string
+ *         example: League in England
+ *       season:
+ *         type: string
+ *         example: Winter
+ *   UserID:
+ *     type: object
+ *     properties:
+ *       UserId:
+ *         type: string
+ *         example: 5d9dab1ced1b960f48fd8a89
+ */
 
 router.route('/')
+
+/**
+ * @swagger
+ * /leagues:
+ *  get:
+ *    tags: [Leagues]
+ *    summary: Get all leagues
+ *    description: Use to request all leagues
+ *    responses:
+ *      '200':
+ *        description: All leagues object
+ *      '404':
+ *        description: Returns error message
+ */
+
     .get(controller.getAllLeagues.bind(LeaguesController))
+
+/**
+ * @swagger
+ * /leagues:
+ *   post:
+ *     tags: [Leagues]
+ *     summary: Add a new league
+ *     parameters:
+ *       - in: body
+ *         newLeague: body
+ *         description: League object that needs to be added
+ *         required: true
+ *         schema:
+ *           $ref: '#definitions/League'
+ *     responses:
+ *       '200':
+ *         description: New league object
+ *       '404':
+ *         description: Returns error message
+ */
+
     .post(controller.addLeague.bind(LeaguesController));
 
-
-
 router.route('/:leaguesId')
+
+/**
+ * @swagger
+ * /leagues/{leagueId}:
+ *   get:
+ *     tags: [Leagues]
+ *     summary: Find league by ID
+ *     parameters:
+ *       - name: leagueId
+ *         in: path
+ *         description: to find League
+ *         type: string
+ *         required: true
+ *     responses:
+ *       '200':
+ *         description: Returns league object
+ *       '404':
+ *         description: Returns error message
+ */
+
     .get(controller.getLeague.bind(LeaguesController))
+
+/**
+ * @swagger
+ * /leagues/{leagueId}:
+ *   put:
+ *     tags: [Leagues]
+ *     summary: Edit league by id
+ *     parameters:
+ *       - name: leagueId
+ *         in: path
+ *         description: to update League
+ *         type: string
+ *         required: true
+ *       - in: body
+ *         name: body
+ *         description: New league parameters
+ *         required: true
+ *         schema:
+ *           $ref: '#definitions/League'
+ *     responses:
+ *       '200':
+ *         description: Updated league object
+ *       '404':
+ *         description: Returns error message
+ */
+
     .put(controller.updateLeague.bind(LeaguesController))
+
+/**
+* @swagger
+* /leagues/{leagueId}:
+*   delete:
+*     tags: [Leagues]
+*     summary: delete league by id
+*     parameters:
+*       - name: leagueId
+*         in: path
+*         description:  to delete League
+*         type: string
+*         required: true
+*     responses:
+*       '200':
+*         description: Message with deleting confirmation
+*       '404':
+*         description: Returns error message
+*/
+
     .delete(controller.deleteLeague.bind(LeaguesController));
 
 router.route('/:leaguesId/users')
-    .post(controller.addLeagueUser.bind(LeaguesController))
-    .get(controller.getLeagueUsers.bind(LeaguesController));
 
-router.route('/:leaguesId/users')
-    .get(controller.getLeagueUsers.bind(LeaguesController))
+/**
+ * @swagger
+ * /leagues/{leagueId}/users:
+ *   post:
+ *     tags: [Leagues]
+ *     summary: Add user to league
+ *     parameters:
+ *       - name: leagueId
+ *         in: path
+ *         description: to add user
+ *         type: string
+ *         required: true
+ *       - in: body
+ *         userId: string
+ *         required: true
+ *         schema:
+ *           $ref: '#definitions/UserId'
+ *     responses:
+ *       '200':
+ *         description: League object with users
+ *       '404':
+ *         description: Returns error message
+ */
+
     .post(controller.addLeagueUser.bind(LeaguesController));
 
 module.exports = router;

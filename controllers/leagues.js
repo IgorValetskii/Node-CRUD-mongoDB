@@ -47,12 +47,6 @@ class Controller {
 
     }
 
-    async getLeagueUsers(req, res) {
-        const {leaguesId} = req.params;
-        const result = await service.getLeagueUsers(leaguesId);
-        res.status(201).json(result);
-    }
-
 }
 
 module.exports = Controller;
