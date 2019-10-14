@@ -26,15 +26,20 @@ const controller = new StagesController();
  *         type: string
  *         example: liverpool
  *       league:
- *         type: string
- *         example: 5d9dacd0ed1b960f48fd8a8c
- *   LeagueId:
- *     type: object
- *     properties:
- *       leagueId:
- *         type: string
- *         example: 5d9dacd0ed1b960f48fd8a8c
+ *         type: object
+ *         properties:
+ *           leagueId:
+ *             type: string
+ *             example: 5d9dacd0ed1b960f48fd8a8c
  */
+ // *
+ // *   LeagueId:
+ // *     type: object
+ // *     properties:
+ // *       leagueId:
+ // *         type: string
+ // *         example: 5d9dacd0ed1b960f48fd8a8c
+ // */
 
 router.route('/')
 
@@ -53,11 +58,98 @@ router.route('/')
  */
 
     .get(controller.getAllStages.bind(StagesController))
+
+/**
+ * @swagger
+ * /stages:
+ *   post:
+ *     tags: [Stages]
+ *     summary: Add a new stage
+ *     parameters:
+ *       - in: body
+ *         newStage: body
+ *         description: Stage object that needs to be added
+ *         required: true
+ *         schema:
+ *           $ref: '#definitions/Stage'
+ *     responses:
+ *       '200':
+ *         description: New stage object
+ *       '404':
+ *         description: Returns error message
+ */
+
     .post(controller.addStage.bind(StagesController));
 
 router.route('/:stagesId')
+
+/**
+ * @swagger
+ * /stages/{stagesId}:
+ *   get:
+ *     tags: [Stages]
+ *     summary: Find stage by Id
+ *     parameters:
+ *       - name: StageId
+ *         in: path
+ *         description: to find Stage
+ *         type: string
+ *         required: true
+ *     responses:
+ *       '200':
+ *         description: Returns stage object
+ *       '404':
+ *         description: Returns error message
+ */
+
     .get(controller.getStage.bind(StagesController))
+
+/**
+ * @swagger
+ * /stages/{stageId}:
+ *   put:
+ *     tags: [Stages]
+ *     summary: Edit stage by Id
+ *     parameters:
+ *       - name: stageId
+ *         in: path
+ *         description: to update Stage
+ *         type: string
+ *         required: true
+ *       - in: body
+ *         name: body
+ *         description: New stage parameters
+ *         required: true
+ *         schema:
+ *           $ref: '#definitions/Stage'
+ *     responses:
+ *       '200':
+ *         description: Updated stage object
+ *       '404':
+ *         description: Returns error message
+ */
+
     .put(controller.updateStage.bind(StagesController))
+
+/**
+ * @swagger
+ * /stages/{stageId}:
+ *   delete:
+ *     tags: [Stages]
+ *     summary: delete stage by Id
+ *     parameters:
+ *       - name: stageId
+ *         in: path
+ *         description:  to delete Stage
+ *         type: string
+ *         required: true
+ *     responses:
+ *       '200':
+ *         description: Message with deleting confirmation
+ *       '404':
+ *         description: Returns error message
+ */
+
     .delete(controller.deleteStage.bind(StagesController));
 
 module.exports = router;

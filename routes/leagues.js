@@ -24,13 +24,15 @@ const controller = new LeaguesController();
  *       season:
  *         type: string
  *         example: Winter
- *   UserId:
- *     type: object
- *     properties:
- *       UserId:
- *         type: string
- *         example: 5d9dab1ced1b960f48fd8a89
- */
+ *       users:
+ *         type: array
+ *         items:
+ *           type: object
+ *           properties:
+ *             userId:
+ *               type: string
+ *               example: 5d9dab1ced1b960f48fd8a89
+*/
 
 router.route('/')
 
