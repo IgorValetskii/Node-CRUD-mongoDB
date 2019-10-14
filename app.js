@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger');
