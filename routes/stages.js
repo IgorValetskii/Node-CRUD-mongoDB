@@ -32,14 +32,7 @@ const controller = new StagesController();
  *             type: string
  *             example: 5d9dacd0ed1b960f48fd8a8c
  */
- // *
- // *   LeagueId:
- // *     type: object
- // *     properties:
- // *       leagueId:
- // *         type: string
- // *         example: 5d9dacd0ed1b960f48fd8a8c
- // */
+
 
 router.route('/')
 

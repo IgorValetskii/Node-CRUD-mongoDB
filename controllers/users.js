@@ -26,6 +26,9 @@ class Controller {
 
 
     async updateUser(req, res, next) {
+            //считываю токен с хедера декодирую, проверяю поле IsAdmin true или false.
+        // если false отправляю  У Вас нет прав
+        // если true вызываю сервис.
         const {userId} = req.params;
         const newUser = req.body;
         const result = await service.updateUser(userId,newUser);

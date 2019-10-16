@@ -7,6 +7,9 @@ const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger');
 const swaggerJSDoc = require('swagger-jsdoc');
 
+// const verifyToken = require('./verifyToken');
+
+
 const options = {
     definition: {
         openapi: '3.0.0', // Specification (optional, defaults to swagger: '2.0')
@@ -28,37 +31,9 @@ const swaggerSpec = swaggerJSDoc(options);
 //     res.send(swaggerSpec);
 // });
 
-app.post('/api/login', (req, res) => {
-    const admin = {
-        id: 1,
-        username: 'brad',
-        email: 'brad@gmail.com'
-    };
-    jwt.sign({admin}, 'secretkey', {expiresIn: '1d'}, (err, token) => {
-        res.json({token});
-    })
-});
-
-function verifyToken(req, res, next) {
-    //Get auth header value
-    const bearerHeader = req.headers['authorization'];
-    if (typeof bearerHeader !== 'undefined') {
-        const bearer = bearerHeader.split(' ');
-        const bearerToken = bearer[1];
-        req.token = bearerToken;
-    } else {
-        res.sendStatus(403);
-    }
-    jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (err) {
-            res.sendStatus(403);
-
-        }
-        next();
-    });
-}
 
 //Routes
+const login = require('./routes/userlogin');
 const users = require('./routes/users');
 const leagues = require('./routes/leagues');
 const stages = require('./routes/stages');
@@ -71,10 +46,11 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 //Routes
-app.use('/users', verifyToken, users);
-app.use('/leagues', verifyToken, leagues);
-app.use('/stages', verifyToken, stages);
-app.use('/races', verifyToken, races);
+app.use('/api/login', login);
+app.use('/users',  users);
+app.use('/leagues', leagues);
+app.use('/stages', stages);
+app.use('/races', races);
 
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
