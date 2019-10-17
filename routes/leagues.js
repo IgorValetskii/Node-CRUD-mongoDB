@@ -1,5 +1,8 @@
 const router = require('express-promise-router')();
 
+const verifyToken = require('../verifyToken');
+const verifyTokenAdmin = require('../verifyTokenAdmin');
+
 const LeaguesController = require('../controllers/leagues');
 const controller = new LeaguesController();
 /**
@@ -50,7 +53,7 @@ router.route('/')
  *        description: Returns error message
  */
 
-    .get(controller.getAllLeagues.bind(LeaguesController))
+    .get(verifyToken,controller.getAllLeagues.bind(LeaguesController))
 
 /**
  * @swagger
@@ -72,7 +75,7 @@ router.route('/')
  *         description: Returns error message
  */
 
-    .post(controller.addLeague.bind(LeaguesController));
+    .post(verifyTokenAdmin,controller.addLeague.bind(LeaguesController));
 
 router.route('/:leaguesId')
 
@@ -95,7 +98,7 @@ router.route('/:leaguesId')
  *         description: Returns error message
  */
 
-    .get(controller.getLeague.bind(LeaguesController))
+    .get(verifyToken,controller.getLeague.bind(LeaguesController))
 
 /**
  * @swagger
@@ -122,7 +125,7 @@ router.route('/:leaguesId')
  *         description: Returns error message
  */
 
-    .put(controller.updateLeague.bind(LeaguesController))
+    .put(verifyTokenAdmin,controller.updateLeague.bind(LeaguesController))
 
 /**
 * @swagger
@@ -143,7 +146,7 @@ router.route('/:leaguesId')
 *         description: Returns error message
 */
 
-    .delete(controller.deleteLeague.bind(LeaguesController));
+    .delete(verifyTokenAdmin,controller.deleteLeague.bind(LeaguesController));
 
 router.route('/:leaguesId/users')
 
@@ -171,6 +174,6 @@ router.route('/:leaguesId/users')
  *         description: Returns error message
  */
 
-    .post(controller.addLeagueUser.bind(LeaguesController));
+    .post(verifyTokenAdmin,controller.addLeagueUser.bind(LeaguesController));
 
 module.exports = router;

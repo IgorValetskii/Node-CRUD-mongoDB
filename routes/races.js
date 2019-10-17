@@ -1,5 +1,8 @@
 const router = require('express-promise-router')();
 
+const verifyToken = require('../verifyToken');
+const verifyTokenAdmin = require('../verifyTokenAdmin');
+
 const RacesController = require('../controllers/races');
 const controller = new RacesController();
 
@@ -56,7 +59,7 @@ router.route('/')
  *        description: Returns error message
  */
 
-    .get(controller.getAllRaces.bind(RacesController))
+    .get(verifyToken,controller.getAllRaces.bind(RacesController))
 
 /**
  * @swagger
@@ -78,7 +81,7 @@ router.route('/')
  *         description: Returns error message
  */
 
-    .post(controller.addRace.bind(RacesController));
+    .post(verifyTokenAdmin,controller.addRace.bind(RacesController));
 
 router.route('/:racesId')
 
@@ -100,7 +103,7 @@ router.route('/:racesId')
  *       '404':
  *         description: Returns error message
  */
-    .get(controller.getRace.bind(RacesController))
+    .get(verifyToken,controller.getRace.bind(RacesController))
 
 /**
  * @swagger
@@ -127,7 +130,7 @@ router.route('/:racesId')
  *         description: Returns error message
  */
 
-    .put(controller.updateRace.bind(RacesController))
+    .put(verifyTokenAdmin,controller.updateRace.bind(RacesController))
 
 /**
  * @swagger
@@ -149,7 +152,7 @@ router.route('/:racesId')
  */
 
 
-    .delete(controller.deleteRace.bind(RacesController));
+    .delete(verifyTokenAdmin,controller.deleteRace.bind(RacesController));
 
 router.route('/:season/stages')
 
@@ -172,6 +175,6 @@ router.route('/:season/stages')
  *         description: Returns error message
  */
 
-    .get(controller.getRaceStages.bind(RacesController));
+    .get(verifyToken,controller.getRaceStages.bind(RacesController));
 
 module.exports = router;

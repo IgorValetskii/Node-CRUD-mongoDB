@@ -1,6 +1,7 @@
 const router = require('express-promise-router')();
 
 const verifyToken = require('../verifyToken');
+const verifyTokenAdmin = require('../verifyTokenAdmin');
 
 const UsersController = require('../controllers/users');
 const Controller = new UsersController();
@@ -120,7 +121,7 @@ router.route('/:userId')
  *         description: Returns error message
  */
 
-    .put(verifyToken,Controller.updateUser.bind(UsersController))
+    .put(verifyTokenAdmin,Controller.updateUser.bind(UsersController))
 
 /**
  * @swagger
@@ -141,7 +142,7 @@ router.route('/:userId')
  *         description: Returns error message
  */
 
-    .delete(verifyToken,Controller.deleteUser.bind(UsersController));
+    .delete(verifyTokenAdmin,Controller.deleteUser.bind(UsersController));
 
 router.route('/:userId/races')
 

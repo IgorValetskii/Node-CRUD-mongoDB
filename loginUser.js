@@ -13,7 +13,7 @@ async function loginUser(req, res, next) {
         });
 
     }else {
-        res.status(403).send('Uncorrect username or password')
+        res.status(403).send('Incorrect username or password')
     }
 }
 

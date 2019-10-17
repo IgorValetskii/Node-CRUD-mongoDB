@@ -1,5 +1,8 @@
 const router = require('express-promise-router')();
 
+const verifyToken = require('../verifyToken');
+const verifyTokenAdmin = require('../verifyTokenAdmin');
+
 const StagesController = require('../controllers/stages');
 const controller = new StagesController();
 
@@ -50,7 +53,7 @@ router.route('/')
  *        description: Returns error message
  */
 
-    .get(controller.getAllStages.bind(StagesController))
+    .get(verifyToken,controller.getAllStages.bind(StagesController))
 
 /**
  * @swagger
@@ -72,7 +75,7 @@ router.route('/')
  *         description: Returns error message
  */
 
-    .post(controller.addStage.bind(StagesController));
+    .post(verifyTokenAdmin,controller.addStage.bind(StagesController));
 
 router.route('/:stagesId')
 
@@ -95,7 +98,7 @@ router.route('/:stagesId')
  *         description: Returns error message
  */
 
-    .get(controller.getStage.bind(StagesController))
+    .get(verifyToken,controller.getStage.bind(StagesController))
 
 /**
  * @swagger
@@ -122,7 +125,7 @@ router.route('/:stagesId')
  *         description: Returns error message
  */
 
-    .put(controller.updateStage.bind(StagesController))
+    .put(verifyTokenAdmin,controller.updateStage.bind(StagesController))
 
 /**
  * @swagger
@@ -143,6 +146,6 @@ router.route('/:stagesId')
  *         description: Returns error message
  */
 
-    .delete(controller.deleteStage.bind(StagesController));
+    .delete(verifyTokenAdmin,controller.deleteStage.bind(StagesController));
 
 module.exports = router;
