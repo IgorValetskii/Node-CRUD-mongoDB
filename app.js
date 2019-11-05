@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger');
 const swaggerJSDoc = require('swagger-jsdoc');
-
+const cors = require('cors');
 // const verifyToken = require('./verifyToken');
 
 
@@ -40,6 +40,8 @@ const stages = require('./routes/stages');
 const races = require('./routes/races');
 
 //Middlewares
+app.use(cors());
+
 app.use(bodyParser.urlencoded({
     extended: false
 }));
@@ -63,8 +65,8 @@ async function start() {
             useUnifiedTopology: true
         });
 
-        app.listen(3000, () => {
-            console.log('Example app listening on port 3000!');
+        app.listen(3010, () => {
+            console.log('Example app listening on port 3010!');
         });
     } catch (e) {
         console.log(e);

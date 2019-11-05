@@ -49,7 +49,7 @@ router.route('/')
  *        description: Returns error message
  */
 
-    .get(verifyToken,Controller.getAllUsers.bind(UsersController))
+    .get(Controller.getAllUsers.bind(UsersController))
 
     /**
      * @swagger
@@ -94,7 +94,7 @@ router.route('/:userId')
  *         description: Returns error message
  */
 
-    .get(verifyToken,Controller.getUser.bind(UsersController))
+    .get(Controller.getUser.bind(UsersController))
 
 /**
  * @swagger
@@ -121,7 +121,7 @@ router.route('/:userId')
  *         description: Returns error message
  */
 
-    .put(verifyTokenAdmin,Controller.updateUser.bind(UsersController))
+    .put(Controller.updateUser.bind(UsersController))
 
 /**
  * @swagger
@@ -142,7 +142,7 @@ router.route('/:userId')
  *         description: Returns error message
  */
 
-    .delete(verifyTokenAdmin,Controller.deleteUser.bind(UsersController));
+    .delete(Controller.deleteUser.bind(UsersController));
 
 router.route('/:userId/races')
 
